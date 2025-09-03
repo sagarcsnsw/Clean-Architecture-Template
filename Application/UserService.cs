@@ -10,10 +10,7 @@ namespace YourApp.Application.Services
         private readonly IUserHobbyRepository _userHobbyRepository;
         private readonly ICurrentUserService _currentUserService;
 
-        public UserService(
-            IUserRepository userRepository,
-            IUserHobbyRepository userHobbyRepository,
-            ICurrentUserService currentUserService)
+        public UserService( IUserRepository userRepository, IUserHobbyRepository userHobbyRepository, ICurrentUserService currentUserService)
         {
             _userRepository = userRepository;
             _userHobbyRepository = userHobbyRepository;
@@ -26,11 +23,14 @@ namespace YourApp.Application.Services
             // ✅ Argument validation in Application layer
             var currentUser = await _currentUserService.GetCurrentUserAsync();
             if (!currentUser.IsActive)
+            {
                 throw new UnauthorizedAccessException("Only active users can view user list");
+            }
 
             // ✅ Call Infrastructure interface
             return await _userHobbyRepository.GetUsersWithHobbiesAsync();
         }
+
 
         // ✅ Use case: Create user with business logic
         public async Task<User> CreateUserAsync(CreateUserRequestDto request)

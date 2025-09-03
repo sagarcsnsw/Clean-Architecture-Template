@@ -24,6 +24,7 @@ namespace YourApp.Infrastructure.Repositories
             return entity.ToDomainEntity(); // ✅ Map to Core entity
         }
 
+
         public async Task<List<User>> GetAllActiveUsersAsync()
         {
             var entities = await _context.Users
@@ -32,6 +33,7 @@ namespace YourApp.Infrastructure.Repositories
                 
             return entities.Select(e => e.ToDomainEntity()).ToList();
         }
+
 
         public async Task<User> CreateAsync(User user)
         {
@@ -42,6 +44,7 @@ namespace YourApp.Infrastructure.Repositories
             
             return entity.ToDomainEntity();
         }
+
 
         public async Task<User> UpdateAsync(User user)
         {
@@ -58,6 +61,7 @@ namespace YourApp.Infrastructure.Repositories
             return entity.ToDomainEntity();
         }
 
+
         public async Task DeleteAsync(int id)
         {
             var entity = await _context.Users.FindAsync(id);
@@ -67,6 +71,7 @@ namespace YourApp.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
 
         public async Task<List<User>> GetUsersByParentIdAsync(int parentId)
         {

@@ -15,7 +15,6 @@ namespace YourApp.Presentation.Controllers
             _userService = userService;
         }
 
-        // ✅ Extract arguments from HTTP request
         [HttpGet("with-hobbies")]
         public async Task<IActionResult> GetUsersWithHobbies()
         {
@@ -44,6 +43,7 @@ namespace YourApp.Presentation.Controllers
             }
         }
 
+        
         [HttpGet("{id}/with-hobbies")]
         public async Task<IActionResult> GetUserWithHobbies(int id)
         {
@@ -63,6 +63,7 @@ namespace YourApp.Presentation.Controllers
             }
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDto request)
         {
@@ -95,6 +96,7 @@ namespace YourApp.Presentation.Controllers
                 return StatusCode(500, new { message = "Internal server error", error = ex.Message });
             }
         }
+
 
         [HttpPut("parent/{parentId}/update-students")]
         public async Task<IActionResult> UpdateStudentsWhenParentChanges(int parentId)
